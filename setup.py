@@ -12,5 +12,5 @@ setup(
     author_email='roshangiyanani@gmail.com',
     url='https://github.com/roshangiyanani/pt_location_scaper',
     license=license,
-    packages=find_packages(exclude=('tests', 'data'))
+    packages=find_packages(exclude=('test', 'data'))
 )
