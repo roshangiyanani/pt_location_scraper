@@ -13,3 +13,9 @@ class TestArgsClass(unittest.TestCase):
         self.assertEqual(args.out_location, Path('./data'))
         args.set_location('./build')
         self.assertEqual(args.out_location, Path('./build'))
+
+        # Should fail on file or nonexistent directory
+        with self.assertRaises(NotADirectoryError):
+            args.set_location('test/__init__.py')
+        with self.assertRaises(FileNotFoundError):
+            args.set_location('abcdefg')

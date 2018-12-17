@@ -1,3 +1,4 @@
-import args
+from args import Args, get_args
 
-print("Hello World");
+args: Args = get_args()
+print(f"Output location is '{str(args.out_location)}/'");
