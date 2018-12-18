@@ -2,7 +2,7 @@ import unittest
 
 from ptls.scrapers.util import get_page
 
-class TestArgsClass(unittest.TestCase):
+class TestScraperUtilClass(unittest.TestCase):
 
     def test_valid(self):
         self.assertIsNotNone(get_page('https://www.google.com'))

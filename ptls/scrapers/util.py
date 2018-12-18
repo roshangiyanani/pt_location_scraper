@@ -1,8 +1,7 @@
-from bs4 import BeautifulSoup
 from requests import get, Response
 from requests.exceptions import RequestException
 
-def get_page(url) -> None or BeautifulSoup:
+def get_page(url) -> None or str:
     """
     Attempts to get the content at `url` by making an HTTP GET request.
     If the content-type of response is some kind of HTML/XML, return the
@@ -14,7 +13,7 @@ def get_page(url) -> None or BeautifulSoup:
         with get(url, stream=True) as resp:
             if is_good_response(resp):
                 raw_html: str = resp.content
-                return BeautifulSoup(raw_html, 'html.parser')
+                return raw_html
             else:
                 return None
     except RequestException as e:
