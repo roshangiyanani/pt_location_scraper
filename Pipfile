@@ -6,6 +6,8 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 v = {editable = true,version = "*"}
+pylint = "*"
+autopep8 = "*"
 
 [packages]
 setuptools = "*"
@@ -13,6 +15,7 @@ pathlib = "*"
 argparse = "*"
 requests = "*"
 beautifulsoup4 = "*"
+typing = "*"
 
 [requires]
 python_version = "3.7"
