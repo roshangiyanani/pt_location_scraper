@@ -17,9 +17,20 @@ states_url: str = f'{base_url}/locations/'
 
 
 class Athletico:
+
+    company_name = 'Athletico'
+    company_name_upper = company_name.upper()
+
+    test_urls: Dict[str, Tuple[str, str]] = dict({
+        'states': (f'{company_name}/locations.html', states_url),
+        'locations': (f'{company_name}/illinois.html', 'http://www.athletico.com/regions/illinois/'),
+        'clinic': (f'{company_name}/bloomington.html',
+                   'http://www.athletico.com/locations/bloomington-illinois/?location=bloomington-illinois'),
+    })
+
     @staticmethod
     def run(req: Requester) -> Iterator[Clinic]:
-        sys.stdout.write(f'\rATHLETICA: Processing.')
+        sys.stdout.write(f'\r{Athletico.company_name_upper}: Processing.')
         total_location_count: int = 0
 
         states: [str] = Athletico._get_states(req, states_url)
@@ -29,7 +40,7 @@ class Athletico:
         for state_url in states:
             state_count = state_count + 1
             sys.stdout.write(
-                f'\rATHLETICA: Processing state {state_count}/{states_len}.                      ')
+                f'\r{Athletico.company_name_upper}: Processing state {state_count}/{states_len}.                      ')
 
             locations: [str] = Athletico._get_locations(req, state_url)
             # print(locations)
@@ -38,12 +49,12 @@ class Athletico:
             for location_url in locations:
                 location_count = location_count + 1
                 sys.stdout.write(
-                    f'\rATHLETICA: Processing state {state_count}/{states_len} and location {location_count}/{locations_len}.              ')
+                    f'\r{Athletico.company_name_upper}: Processing state {state_count}/{states_len} and location {location_count}/{locations_len}.              ')
                 yield Athletico._get_clinic(req, location_url)
             total_location_count = total_location_count + location_count
 
         sys.stdout.write(
-            f'\rATHLETICA: Processed {states_len} states to find {total_location_count} clinics.                \n')
+            f'\r{Athletico.company_name_upper}: Processed {states_len} states to find {total_location_count} clinics.                \n')
 
     @staticmethod
     def _get_states(req: Requester, url: str) -> [str]:
@@ -85,7 +96,6 @@ class Athletico:
     @staticmethod
     def _get_clinic_info(raw_html: str, url: str) -> Clinic:
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
-        company: str = 'Athletico Physical Therapy'
         location_name: str = page.find('h1', {'class': 'innerPage'}).string
         address: str = ' '.join(page.find('div', id='geographicInfo')
                                 .find('p', {'class': 'subheadText'}).stripped_strings)
@@ -102,10 +112,4 @@ class Athletico:
                     email: str = email_match[2].strip()
         fax: str = page.find('div', id='contactInfo').find(
             'div').find('span').string
-        return Clinic(company, location_name, address, phone, url, fax, email)
-
-test_urls: Dict[str, Tuple[str, str]] = dict({
-    'states': ('athletico/locations.html', states_url),
-    'locations': ('athletico/illinois.html', 'http://www.athletico.com/regions/illinois/'),
-    'clinic': ('athletico/bloomington.html', 'http://www.athletico.com/locations/bloomington-illinois/?location=bloomington-illinois'),
-})
+        return Clinic(Athletico.company_name, location_name, address, phone, url, fax, email)

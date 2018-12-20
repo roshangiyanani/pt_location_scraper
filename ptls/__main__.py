@@ -10,10 +10,10 @@ print(f'Network delay is {args.network_delay} seconds.')
 
 req: Requester = Requester(args.network_delay)
 
-clinics = [
-    (Athletico, 'athletico'),
-    (ATI, 'ati')
+clinic_scrapers = [
+    Athletico,
+    ATI
 ]
 
-for (company_scraper, company) in clinics:
-    write_clinic_list(company_scraper.run(req), args.out_location.joinpath(company))
+for scraper in clinic_scrapers:
+    write_clinic_list(scraper.run(req), args.out_location.joinpath(scraper.company_name))
