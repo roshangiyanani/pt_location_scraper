@@ -3,9 +3,11 @@ from pathlib import Path
 import unittest
 
 from ptls.clinic import Clinic
-from ptls.scrapers.ATI import ATI, test_urls
+from ptls.scrapers.ATI import ATI
 
 path: Path = Path('./data/test_files')
+
+test_urls = ATI.test_urls
 
 class TestScraperATIClass(unittest.TestCase):
 
@@ -34,7 +36,7 @@ class TestScraperATIClass(unittest.TestCase):
         clinic: Clinic = ATI._parse_profile(page, 'Fairbanks - Lathrop St', test_urls['profile'][0])
         # TODO: Fix 'Fairbanks ,' spacing
         self.assertEqual(clinic, Clinic(
-            'ATI Physical Therapy', 'Fairbanks - Lathrop St',
+            ATI.company_name, 'Fairbanks - Lathrop St',
             '1919 Lathrop St, #123, Fairbanks , AK 99701',
             '(907) 455-4401', test_urls['profile'][0],
             fax='(907) 455-4402'

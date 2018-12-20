@@ -2,10 +2,11 @@ import unittest
 from pathlib import Path
 
 from ptls.clinic import Clinic
-from ptls.scrapers.athletico import Athletico, test_urls
+from ptls.scrapers.athletico import Athletico
 
 path: Path = Path('./data/test_files')
 
+test_urls = Athletico.test_urls
 
 class TestScraperAthleticoClass(unittest.TestCase):
 
@@ -27,7 +28,7 @@ class TestScraperAthleticoClass(unittest.TestCase):
         clinic: Clinic = Athletico._get_clinic_info(raw_html, test_urls['clinic'][0])
         # print(clinic)
         self.assertEqual(clinic,
-                         Clinic('Athletico Physical Therapy', 'Bloomington',
+                         Clinic(Athletico.company_name, 'Bloomington',
                                 'Bloomington 1704 Eastland Dr., Unit 15 Bloomington, IL 61704',
                                 '309-664-7766', test_urls['clinic'][0],
                                 fax='309-664-6767', email='BloomingtonIL@athletico.com'))
