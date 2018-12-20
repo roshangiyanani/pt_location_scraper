@@ -1,5 +1,6 @@
 test/scrapers/test_files
-
+data
+.vscode
 .idea/
 
 # Byte-compiled / optimized / DLL files
