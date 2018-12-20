@@ -5,9 +5,15 @@ from scrapers.ATI import ATI
 from requester import Requester
 
 args: Args = get_args()
-print(f'Output location is "{str(args.out_location)}/".')
+print(f'Output location is "{str(args.out_location.resolve())}/".')
 print(f'Network delay is {args.network_delay} seconds.')
 
 req: Requester = Requester(args.network_delay)
-write_clinic_list(Athletico.run(req), args.out_location.joinpath('athletico'))
-write_clinic_list(ATI.run(req), args.out_location.joinpath('ati'))
+
+clinics = [
+    (Athletico, 'athletico'),
+    (ATI, 'ati')
+]
+
+for (company_scraper, company) in clinics:
+    write_clinic_list(company_scraper.run(req), args.out_location.joinpath(company))
