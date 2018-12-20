@@ -11,11 +11,11 @@ class TestArgsClass(unittest.TestCase):
     def test_set_location(self):
         args: Args = Args()
         self.assertEqual(args.out_location, Path('./data'))
-        args.set_location('./build')
+        args._set_location('./build')
         self.assertEqual(args.out_location, Path('./build'))
 
         # Should fail on file or nonexistent directory
         with self.assertRaises(NotADirectoryError):
-            args.set_location('test/__init__.py')
+            args._set_location('test/test_args.py')
         with self.assertRaises(FileNotFoundError):
-            args.set_location('abcdefg')
+            args._set_location('abcdefg')
