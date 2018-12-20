@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import re
 from re import Match
 import sys
-from typing import Iterator
+from typing import Dict, Iterator, Tuple
 
 from ptls.clinic import Clinic
 from ptls.requester import Requester
@@ -103,3 +103,9 @@ class Athletico:
         fax: str = page.find('div', id='contactInfo').find(
             'div').find('span').string
         return Clinic(company, location_name, address, phone, url, fax, email)
+
+test_urls: Dict[str, Tuple[str, str]] = dict({
+    'states': ('athletico/locations.html', states_url),
+    'locations': ('athletico/illinois.html', 'http://www.athletico.com/regions/illinois/'),
+    'clinic': ('athletico/bloomington.html', 'http://www.athletico.com/locations/bloomington-illinois/?location=bloomington-illinois'),
+})

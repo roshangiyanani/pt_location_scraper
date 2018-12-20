@@ -13,7 +13,7 @@ class Clinic:
 
     def __init__(self, company: str, name: str, address: str, phone: str,
                  url: str, fax: str or None = None, email: str or None = None):
-        self.company = company;
+        self.company = company
         self.name = name
         self.address = address
         self.phone = phone
