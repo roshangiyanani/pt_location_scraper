@@ -38,17 +38,16 @@ class Requester:
             sleep_time: float = (self._min_delay - delta) / 10**9
             # print(f'sleeping for {sleep_time} seconds')
             time.sleep(sleep_time)
+        self._set_last_use()
 
     def get_page_str(self, url: str) -> str or None:
         self._ensure_delay()
         retval: str or None = Requester._get_page_str(url)
-        self._set_last_use()
         return retval
 
     def get_page_bs(self, url: str) -> BeautifulSoup or None:
         self._ensure_delay()
         retval: BeautifulSoup or None = Requester._get_page_bs(url)
-        self._set_last_use()
         return retval
 
     @staticmethod
@@ -73,6 +72,7 @@ class Requester:
                     return None
         except RequestException as e:
             Requester.log_error(f'Error during requests to {url} : {str(e)}')
+            return None
 
     @staticmethod
     def _get_page_bs(url) -> BeautifulSoup or None:
@@ -86,6 +86,9 @@ class Requester:
         raw_html: str or None = Requester._get_page_str(url)
         if raw_html is not None:
             return BeautifulSoup(raw_html, 'html.parser')
+        else:
+            return None
+
 
     @staticmethod
     def is_good_response(resp: Response) -> bool:
