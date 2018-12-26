@@ -17,6 +17,7 @@ requests = "*"
 beautifulsoup4 = "*"
 typing = "*"
 usaddress = "*"
+uszipcode = "*"
 
 [requires]
 python_version = "3.7"
