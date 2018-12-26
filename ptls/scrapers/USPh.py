@@ -3,6 +3,7 @@ import re
 import sys
 from typing import Dict, Iterator, Tuple
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.requester import Requester
 
@@ -49,7 +50,7 @@ class USPh:
         for td in page.find(id='UpdatePanel1').find('td').find_all('td')[1:]:
             # TODO: find better way of getting first item in generator
             city: str = td.stripped_strings.__next__().strip()
-            address: str = f'{city}, {state}'
+            address: Address = Address.from_city_state(city, state)
             clinic: Clinic = Clinic(USPh.company_name, city, address)
             locations.append(clinic)
         return locations

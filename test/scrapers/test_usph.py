@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 import unittest
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.USPh import USPh
 
@@ -22,4 +23,5 @@ class TestScraperUSPhClass(unittest.TestCase):
             raw_html: str = f.read()
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
         clinics: [Clinic] = USPh._get_clinics(page, 'TN')
-        self.assertEqual(clinics[0], Clinic(USPh.company_name, 'Antioch', 'Antioch, TN'))
+        self.assertEqual(clinics[0], Clinic(USPh.company_name, 'Antioch',
+                                            Address.from_city_state('Antioch', 'TN')))

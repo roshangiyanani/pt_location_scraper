@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import sys
 from typing import Dict, Iterator, Tuple
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.requester import Requester
 
@@ -70,7 +71,7 @@ class ATI:
     @staticmethod
     def _parse_profile(page: BeautifulSoup, name: str, url: str) -> Clinic:
         info = page.find('div', id='business-info')
-        address: str = ' '.join(info.find('div').stripped_strings)
+        address: Address = Address.from_address_str(' '.join(info.find('div').stripped_strings))
         phone: str = info.find('div', {'class': 'desktop'}).find('span').string.strip()
         fax: str = info.contents[9].string.strip()[4:].strip()
         clinic: Clinic = Clinic(ATI.company_name, name, address, phone, url, fax=fax)

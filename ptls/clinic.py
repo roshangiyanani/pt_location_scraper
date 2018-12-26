@@ -1,17 +1,18 @@
 import csv
 from pathlib import Path
 
+from ptls.address import Address
 
 class Clinic:
     company: str
     name: str
-    address: str
+    address: Address
     phone: str or None
     fax: str or None
     email: str or None
     url: str or None
 
-    def __init__(self, company: str, name: str, address: str, phone: str or None = None,
+    def __init__(self, company: str, name: str, address: Address, phone: str or None = None,
                  url: str or None = None, fax: str or None = None, email: str or None = None):
         self.company = company
         self.name = name
@@ -22,12 +23,14 @@ class Clinic:
         self.email = email
 
     def as_row(self) -> [str]:
-        return [self.company or '', self.name or '', self.address or '',
-                self.url or '', self.phone or '', self.email or '', self.fax or '']
+        return [self.company or '', self.name or '', self.address.raw,
+                self.address.city or '', self.address.state or '',
+                self.address.zipcode or '', self.url or '', self.phone or '',
+                self.email or '', self.fax or '']
 
     @staticmethod
     def get_header() -> [str]:
-        return ['company', 'name', 'address', 'url', 'phone', 'email', 'fax']
+        return ['company', 'name', 'address', 'city', 'state', 'zip', 'url', 'phone', 'email', 'fax']
 
     def __eq__(self, other):
         return self.company == other.company \

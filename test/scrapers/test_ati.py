@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from pathlib import Path
 import unittest
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.ATI import ATI
 
@@ -37,7 +38,8 @@ class TestScraperATIClass(unittest.TestCase):
         # TODO: Fix 'Fairbanks ,' spacing
         self.assertEqual(clinic, Clinic(
             ATI.company_name, 'Fairbanks - Lathrop St',
-            '1919 Lathrop St, #123, Fairbanks , AK 99701',
+            Address.from_address_str(
+                '1919 Lathrop St, #123, Fairbanks , AK 99701'),
             '(907) 455-4401', test_urls['profile'][0],
             fax='(907) 455-4402'
         ))

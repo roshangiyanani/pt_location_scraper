@@ -18,6 +18,7 @@ beautifulsoup4 = "*"
 typing = "*"
 usaddress = "*"
 uszipcode = "*"
+usaddress-scourgify = "*"
 
 [requires]
 python_version = "3.7"

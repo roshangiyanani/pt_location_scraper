@@ -4,6 +4,7 @@ from re import Match
 import sys
 from typing import Dict, Iterator, Tuple
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.requester import Requester
 
@@ -97,8 +98,9 @@ class Athletico:
     def _get_clinic_info(raw_html: str, url: str) -> Clinic:
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
         location_name: str = page.find('h1', {'class': 'innerPage'}).string
-        address: str = ' '.join(page.find('div', id='geographicInfo')
-                                .find('p', {'class': 'subheadText'}).stripped_strings)
+        address: Address = Address.from_address_str(
+                                ' '.join(page.find('div', id='geographicInfo')
+                                .find('p', {'class': 'subheadText'}).stripped_strings))
         phone = None
         email = None
         for link in page.find('div', id='contactInfo').find_all('a'):

@@ -1,6 +1,7 @@
 import unittest
 from pathlib import Path
 
+from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.athletico import Athletico
 
@@ -29,6 +30,7 @@ class TestScraperAthleticoClass(unittest.TestCase):
         # print(clinic)
         self.assertEqual(clinic,
                          Clinic(Athletico.company_name, 'Bloomington',
-                                'Bloomington 1704 Eastland Dr., Unit 15 Bloomington, IL 61704',
+                                Address.from_address_str(
+                                    'Bloomington 1704 Eastland Dr., Unit 15 Bloomington, IL 61704'),
                                 '309-664-7766', test_urls['clinic'][0],
                                 fax='309-664-6767', email='BloomingtonIL@athletico.com'))
