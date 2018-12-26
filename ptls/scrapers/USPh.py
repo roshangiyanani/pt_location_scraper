@@ -57,5 +57,5 @@ class USPh:
 
     test_urls: Dict[str, Tuple[str, str]] = dict({
         'states': (f'{company_name}/locations.html', states_url),
-        'clinics': (f'{company_name}/tn.html', f'{states_url}?state=tn#top'),
+        'clinics': (f'{company_name}/nj.html', f'{states_url}?state=nj#top'),
     })

@@ -22,6 +22,6 @@ class TestScraperUSPhClass(unittest.TestCase):
         with path.joinpath(test_urls['clinics'][0]).open('rb') as f:
             raw_html: str = f.read()
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
-        clinics: [Clinic] = USPh._get_clinics(page, 'TN')
-        self.assertEqual(clinics[0], Clinic(USPh.company_name, 'Antioch',
-                                            Address.from_city_state('Antioch', 'TN')))
+        clinics: [Clinic] = USPh._get_clinics(page, 'NJ')
+        self.assertEqual(clinics[0], Clinic(USPh.company_name, 'Boonton',
+                                            Address.from_city_state('Boonton', 'NJ')))
