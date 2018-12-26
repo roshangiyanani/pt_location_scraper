@@ -24,14 +24,14 @@ class Requester:
         Updates the last use to now.
         :return:
         """
-        self._last_use = time.perf_counter_ns()
+        self._last_use = time.time_ns()
 
     def _ensure_delay(self):
         """
         Delays the function until the function call is complete.
         :return: None
         """
-        current_time: int = time.perf_counter_ns()
+        current_time: int = time.time_ns()
         delta: int = current_time - self._last_use
         # print(f'current({current_time}) - last_use({self._last_use}) = delta({delta})')
         if delta < self._min_delay:
