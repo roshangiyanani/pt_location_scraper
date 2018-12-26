@@ -2,6 +2,7 @@ from ptls.requester import Requester
 from ptls.scrapers.athletico import Athletico
 from ptls.scrapers.ATI import ATI
 from ptls.scrapers.USPh import USPh
+from ptls.scrapers.select import Select
 from pathlib import Path
 
 req: Requester = Requester(0.2)
@@ -13,7 +14,8 @@ def download(file: Path, url: str):
 clinic_scrapers = [
     Athletico,
     ATI,
-    USPh
+    USPh,
+    Select,
 ]
 
 for scraper in clinic_scrapers:
