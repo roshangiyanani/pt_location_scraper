@@ -29,8 +29,7 @@ class Address:
         self.zipcode = zipcode
 
     def __eq__(self, other) -> bool:
-        return self.raw == other.raw \
-            and self.address_line_1 == other.address_line_1 \
+        return self.address_line_1 == other.address_line_1 \
             and self.address_line_2 == other.address_line_2 \
             and self.city == other.city \
             and self.state == other.state \
