@@ -44,4 +44,5 @@ To install dependencies:
 
 ~~~~bash
 pipenv sync
+pipenv run pip install -e ./  # pointing to the project root directory
 ~~~~
