@@ -5,7 +5,7 @@ from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.athletico import Athletico
 
-path: Path = Path('./data/test_files')
+path: Path = Path(f'./data/test_files/{Athletico.company_name}')
 
 test_urls = Athletico.test_urls
 

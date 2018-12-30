@@ -6,7 +6,7 @@ from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.ATI import ATI
 
-path: Path = Path('./data/test_files')
+path: Path = Path(f'./data/test_files/{ATI.company_name}')
 
 test_urls = ATI.test_urls
 

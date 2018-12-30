@@ -6,7 +6,7 @@ from ptls.address import Address
 from ptls.clinic import Clinic
 from ptls.scrapers.select import Select
 
-path: Path = Path('./data/test_files')
+path: Path = Path(f'./data/test_files/{Select.company_name}')
 
 test_urls = Select.test_urls
 

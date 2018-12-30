@@ -13,10 +13,11 @@ class Select:
     base_url: str = 'https://www.selectphysicaltherapy.com'
 
     test_urls: Dict[str, Tuple[str, str]] = dict({
-        'communities': (f'{company_name}/communities.html', 'https://www.selectphysicaltherapy.com/about/your-local-community/'),
-        'locations': (f'{company_name}/locations.html','https://www.selectphysicaltherapy.com/community/alaska/'),
+        'communities': (f'communities.html', f'{base_url}/about/your-local-community/'),
+        'locations': (f'locations.html', f'{base_url}/community/alaska/'),
     })
 
+    # match the image url of a clinic to the brand that owns the clinic
     images: Dict[str, str] = {
         '/uploadedImages/NovaCareSelectPT/Content/Shared/Brand_Logos/OP_Select-Physical-Therapy---USE-THIS-ONE-ON-THE-SCROLL.png?n=6636': 'Select Physical Therapy',
         '/uploadedImages/NovaCareSelectPT/Content/Shared/Brand_Logos_v2/Banner-PT-logo.png': 'Banner Physical Therapy',

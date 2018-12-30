@@ -20,5 +20,9 @@ clinic_scrapers = [
 
 for scraper in clinic_scrapers:
     print(f'Downloading {scraper.company_name} test files...')
+    
+    scraper_path: Path = path.joinpath(scraper.company_name)
+    scraper_path.mkdir(parents=True, exist_ok=True)
+
     for (p, url) in scraper.test_urls.values():
-        download(path.joinpath(p), url)
+        download(scraper_path.joinpath(p), url)

@@ -13,57 +13,58 @@ locationMatch = re.compile('/locations/*')
 phoneMatch = re.compile('(tel:)(.*)')
 emailMatch = re.compile('(mailto:)(.*)')
 
-base_url: str = 'https://www.athletico.com'
-states_url: str = f'{base_url}/locations/'
 
 
 class Athletico:
+
+    base_url: str = 'https://www.athletico.com'
+    states_url: str = f'{base_url}/locations/'
 
     company_name = 'Athletico'
     company_name_upper = company_name.upper()
 
     test_urls: Dict[str, Tuple[str, str]] = dict({
-        'states': (f'{company_name}/locations.html', states_url),
-        'locations': (f'{company_name}/illinois.html', 'http://www.athletico.com/regions/illinois/'),
-        'clinic': (f'{company_name}/bloomington.html',
-                   'http://www.athletico.com/locations/bloomington-illinois/?location=bloomington-illinois'),
+        'states': ('locations.html', states_url),
+        'locations': ('illinois.html', f'{base_url}/regions/illinois/'),
+        'clinic': ('bloomington.html',
+                   f'{base_url}/locations/bloomington-illinois/?location=bloomington-illinois'),
     })
 
-    @staticmethod
-    def run(req: Requester) -> Iterator[Clinic]:
-        sys.stdout.write(f'\r{Athletico.company_name_upper}: Processing.')
+    @classmethod
+    def run(cls, req: Requester) -> Iterator[Clinic]:
+        sys.stdout.write(f'\r{cls.company_name_upper}: Processing.')
         total_location_count: int = 0
 
-        states: [str] = Athletico._get_states(req, states_url)
+        states: [str] = cls._get_states(req, cls.states_url)
         # print(states)
         states_len: int = len(states)
         state_count: int = 0
         for state_url in states:
             state_count = state_count + 1
             sys.stdout.write(
-                f'\r{Athletico.company_name_upper}: Processing state {state_count}/{states_len}.                      ')
+                f'\r{cls.company_name_upper}: Processing state {state_count}/{states_len}.                      ')
 
-            locations: [str] = Athletico._get_locations(req, state_url)
+            locations: [str] = cls._get_locations(req, state_url)
             # print(locations)
             locations_len: int = len(locations)
             location_count: int = 0
             for location_url in locations:
                 location_count = location_count + 1
                 sys.stdout.write(
-                    f'\r{Athletico.company_name_upper}: Processing state {state_count}/{states_len} and location {location_count}/{locations_len}.              ')
-                yield Athletico._get_clinic(req, location_url)
+                    f'\r{cls.company_name_upper}: Processing state {state_count}/{states_len} and location {location_count}/{locations_len}.              ')
+                yield cls._get_clinic(req, location_url)
             total_location_count = total_location_count + location_count
 
         sys.stdout.write(
-            f'\r{Athletico.company_name_upper}: Processed {states_len} states to find {total_location_count} clinics.                \n')
+            f'\r{cls.company_name_upper}: Processed {states_len} states to find {total_location_count} clinics.                \n')
 
-    @staticmethod
-    def _get_states(req: Requester, url: str) -> [str]:
+    @classmethod
+    def _get_states(cls, req: Requester, url: str) -> [str]:
         raw_html: str = req.get_page_str(url)
-        return Athletico._get_states_urls(raw_html)
+        return cls._get_states_urls(raw_html)
 
-    @staticmethod
-    def _get_states_urls(raw_html: str) -> [str]:
+    @classmethod
+    def _get_states_urls(cls, raw_html: str) -> [str]:
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
         urls: [str] = list()
         for link in page.find(id='awardsTiles').find_all('a'):
@@ -71,31 +72,31 @@ class Athletico:
             link_address: str = link.get('href')
             if regionMatch.match(link_address) is not None \
                     and link_address != '/regions/view-our-national-location-list/':
-                urls.append(f'{base_url}{link_address}')
+                urls.append(f'{cls.base_url}{link_address}')
         return urls
 
-    @staticmethod
-    def _get_locations(req: Requester, url: str) -> [str]:
+    @classmethod
+    def _get_locations(cls, req: Requester, url: str) -> [str]:
         raw_html: str = req.get_page_str(url)
-        return Athletico._get_location_urls(raw_html)
+        return cls._get_location_urls(raw_html)
 
-    @staticmethod
-    def _get_location_urls(raw_html: str) -> [str]:
+    @classmethod
+    def _get_location_urls(cls, raw_html: str) -> [str]:
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
         urls: [str] = list()
         for link in page.find('div', {'class': 'pf-content'}).find_all('a'):
             link_address: str = link.get('href')
             if locationMatch.match(link_address) is not None:
-                urls.append(f'{base_url}{link_address}')
+                urls.append(f'{cls.base_url}{link_address}')
         return urls
 
-    @staticmethod
-    def _get_clinic(req: Requester, url) -> Clinic:
+    @classmethod
+    def _get_clinic(cls, req: Requester, url) -> Clinic:
         raw_html: str = req.get_page_str(url)
-        return Athletico._get_clinic_info(raw_html, url)
+        return cls._get_clinic_info(raw_html, url)
 
-    @staticmethod
-    def _get_clinic_info(raw_html: str, url: str) -> Clinic:
+    @classmethod
+    def _get_clinic_info(cls, raw_html: str, url: str) -> Clinic:
         page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
         location_name: str = page.find('h1', {'class': 'innerPage'}).string
         address: Address = Address.from_address_str(
@@ -114,4 +115,4 @@ class Athletico:
                     email: str = email_match[2].strip()
         fax: str = page.find('div', id='contactInfo').find(
             'div').find('span').string
-        return Clinic(Athletico.company_name, location_name, address, phone, url, fax, email)
+        return Clinic(cls.company_name, location_name, address, phone, url, fax, email)
