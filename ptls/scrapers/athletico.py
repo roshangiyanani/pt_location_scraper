@@ -14,7 +14,6 @@ phoneMatch = re.compile('(tel:)(.*)')
 emailMatch = re.compile('(mailto:)(.*)')
 
 
-
 class Athletico:
 
     base_url: str = 'https://www.athletico.com'

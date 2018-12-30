@@ -62,7 +62,7 @@ class Requester:
     def post_form_json(self, url: str, data: Dict):
         self._ensure_delay()
         try:
-            with post(url, data=data) as resp:
+            with post(url, data=data, headers=headers) as resp:
                 if Requester.is_good_response(resp, 'json'):
                     return resp.json()
                 else:
