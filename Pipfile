@@ -8,6 +8,7 @@ pytest = "*"
 v = {editable = true,version = "*"}
 pylint = "*"
 autopep8 = "*"
+rope = "*"
 
 [packages]
 setuptools = "*"
