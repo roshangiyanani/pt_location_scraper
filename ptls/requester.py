@@ -1,8 +1,9 @@
-from requests import get, Response
+from bs4 import BeautifulSoup
+from requests import get, post, Response
 from requests.exceptions import RequestException
 from requests.utils import default_headers
-from bs4 import BeautifulSoup
 import time
+from typing import Dict
 
 headers = default_headers()
 headers.update(
@@ -57,6 +58,19 @@ class Requester:
         self._ensure_delay()
         retval: BeautifulSoup or None = Requester._get_page_bs(url)
         return retval
+    
+    def post_form_json(self, url: str, data: Dict):
+        self._ensure_delay()
+        try:
+            with post(url, data=data) as resp:
+                if Requester.is_good_response(resp, 'json'):
+                    return resp.json()
+                else:
+                    return None
+        except RequestException as e:
+            Requester.log_error(f'Error during requests to {url}: {str(e)}')
+            return None
+
 
     @staticmethod
     def log_error(e: str):
@@ -99,7 +113,7 @@ class Requester:
 
 
     @staticmethod
-    def is_good_response(resp: Response) -> bool:
+    def is_good_response(resp: Response, response_type: str = 'html') -> bool:
         """
         Return true if the response seems to be HTML, False otherwise.
         :param resp:
@@ -108,4 +122,4 @@ class Requester:
         content_type = resp.headers['Content-Type'].lower()
         return (resp.status_code == 200
                 and content_type is not None
-                and content_type.find('html') > -1)
+                and content_type.find(response_type) > -1)
