@@ -15,7 +15,7 @@ class TestScraperPivotClass(unittest.TestCase):
     def test_get_states(self):
         with path.joinpath(test_urls['states'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = Pivot._get_states(page)
 
     def test_get_locations(self):
@@ -39,7 +39,7 @@ class TestScraperPivotClass(unittest.TestCase):
     def test_get_profile(self):
         with path.joinpath(test_urls['clinic'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         clinic: Clinic = Pivot._get_profile(page, test_urls['clinic'][1])
         self.assertEqual(clinic, Clinic(
             Pivot.company_name, 'INWOOD, WV', Address.from_address_str('Inwood East Plaza 745 Middleway Pike Inwood, WV 25428'),

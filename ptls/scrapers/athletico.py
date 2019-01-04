@@ -64,7 +64,7 @@ class Athletico:
 
     @classmethod
     def _get_states_urls(cls, raw_html: str) -> [str]:
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = list()
         for link in page.find(id='awardsTiles').find_all('a'):
             # print(link)
@@ -81,7 +81,7 @@ class Athletico:
 
     @classmethod
     def _get_location_urls(cls, raw_html: str) -> [str]:
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = list()
         for link in page.find('div', {'class': 'pf-content'}).find_all('a'):
             link_address: str = link.get('href')
@@ -96,7 +96,7 @@ class Athletico:
 
     @classmethod
     def _get_clinic_info(cls, raw_html: str, url: str) -> Clinic:
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         location_name: str = page.find('h1', {'class': 'innerPage'}).string
         address: Address = Address.from_address_str(
                                 ' '.join(page.find('div', id='geographicInfo')

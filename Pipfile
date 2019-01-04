@@ -20,6 +20,7 @@ typing = "*"
 usaddress = "*"
 uszipcode = "*"
 usaddress-scourgify = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"

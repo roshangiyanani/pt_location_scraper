@@ -107,7 +107,7 @@ class Requester:
         """
         raw_html: str or None = Requester._get_page_str(url)
         if raw_html is not None:
-            return BeautifulSoup(raw_html, 'html.parser')
+            return BeautifulSoup(raw_html, 'lxml')
         else:
             return None
 

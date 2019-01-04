@@ -15,25 +15,25 @@ class TestScraperATIClass(unittest.TestCase):
     def test_get_states(self):
         with path.joinpath(test_urls['states'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = ATI._get_states(page)
 
     def test_get_location(self):
         with path.joinpath(test_urls['locations'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = ATI._get_location(page)
 
     def test_get_clinics(self):
         with path.joinpath(test_urls['clinics'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [(str, str)] = ATI._get_clinics(page)
 
     def test_parse_profile(self):
         with path.joinpath(test_urls['profile'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         clinic: Clinic = ATI._parse_profile(page, 'Fairbanks - Lathrop St', test_urls['profile'][0])
         # TODO: Fix 'Fairbanks ,' spacing
         self.assertEqual(clinic, Clinic(

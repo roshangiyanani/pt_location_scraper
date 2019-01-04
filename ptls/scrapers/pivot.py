@@ -63,7 +63,7 @@ class Pivot:
     def _get_locations(cls, resp) -> [str]:
         urls: [str] = list()
         for location in resp['markers']:
-            html: BeautifulSoup = BeautifulSoup(location['list_format'], features='html.parser')
+            html: BeautifulSoup = BeautifulSoup(location['list_format'], features='lxml')
             url: str = html.find('a').get('href')
             urls.append(url)
         return urls

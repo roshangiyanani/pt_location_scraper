@@ -15,13 +15,13 @@ class TestScraperSelectClass(unittest.TestCase):
     def test_get_communities(self):
         with path.joinpath(test_urls['communities'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         urls: [str] = Select._get_communities(page)
 
     def test_get_clinics(self):
         with path.joinpath(test_urls['locations'][0]).open('rb') as f:
             raw_html: str = f.read()
-        page: BeautifulSoup = BeautifulSoup(raw_html, 'html.parser')
+        page: BeautifulSoup = BeautifulSoup(raw_html, 'lxml')
         clinics: [Clinic] = Select._get_clinics(page)
         self.assertEqual(clinics[0], Clinic('Select Physical Therapy', 'Eagle River',
                                             Address.from_address_str('17101 SNOWMOBILE LANE SUITE 202 EAGLE RIVER, AK  99577-7043'),
