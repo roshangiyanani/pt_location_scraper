@@ -11,10 +11,10 @@ A tool for scraping the website of physical therapy websites to get their locati
 * US Physical Therapy (USPh)
 * Select Physical Therapy
 * Novacare (Part of Select)
+* Pivot Physical Therapy
 
 ### (Hopefully soon to be) supported physical therapy websites
 
-* Pivot Physical Therapy
 * Professional PT
 * Upstream Rehabilitation
 * Fyzical

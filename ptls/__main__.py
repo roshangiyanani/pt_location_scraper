@@ -14,7 +14,11 @@ print(f'Network delay is {args.network_delay} seconds.')
 req: Requester = Requester(args.network_delay)
 
 clinic_scrapers = [
+    Athletico,
+    ATI,
     Pivot,
+    Select,
+    USPh,
 ]
 
 for scraper in clinic_scrapers:

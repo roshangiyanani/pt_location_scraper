@@ -2,6 +2,7 @@ from ptls.requester import Requester
 from ptls.scrapers.athletico import Athletico
 from ptls.scrapers.ATI import ATI
 from ptls.scrapers.pivot import Pivot
+from ptls.scrapers.professional import Professional
 from ptls.scrapers.select import Select
 from ptls.scrapers.USPh import USPh
 from pathlib import Path
@@ -16,6 +17,7 @@ clinic_scrapers = [
     Athletico,
     ATI,
     Pivot,
+    Professional,
     Select,
     USPh,
 ]
