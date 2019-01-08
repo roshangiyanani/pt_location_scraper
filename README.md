@@ -1,6 +1,6 @@
 # Physical Therapy Location Scraper
 
-A tool for scraping the website of physical therapy websites to get their locations.
+A tool for scraping the website of physical therapy companies to get their locations.
 
 ## Documentation
 
@@ -32,7 +32,11 @@ To run the program:
 pipenv run python ptls
 ~~~~
 
-## Installation
+Pass in the `-h` or `--help` flag to get cli options.
+
+## Development
+
+### Installation
 
 Installation requires pipenv, which you can install by running:
 
@@ -43,6 +47,17 @@ pip install pipenv
 To install dependencies:
 
 ~~~~bash
+# from project root
 pipenv sync
-pipenv run pip install -e ./  # pointing to the project root directory
+pipenv run pip install -e ./
+~~~~
+
+### Testing
+
+To test the program:
+
+~~~~bash
+# from project root
+pipenv run python download.py # downloads test files
+pipenv run python -m unittest
 ~~~~
