@@ -2,8 +2,8 @@ import argparse
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-l', '--location', action='store', help='directory to store the files in')
-parser.add_argument('-d', '--delay', action='store', help='delay for network requests (in seconds)', type=float)
+parser.add_argument('-l', '--location', action='store', help='directory to store the files in (defaults to ./data/)')
+parser.add_argument('-d', '--delay', action='store', help='delay for network requests in seconds (defaults to 0.1)', type=float)
 
 class Args:
 
