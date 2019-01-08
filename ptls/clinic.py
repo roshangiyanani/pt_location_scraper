@@ -12,8 +12,7 @@ class Clinic:
     email: str or None
     url: str or None
 
-    def __init__(self, company: str, name: str, address: Address, phone: str or None = None,
-                 url: str or None = None, fax: str or None = None, email: str or None = None):
+    def __init__(self, company: str, name: str, address: Address, phone: str or None = None, url: str or None = None, fax: str or None = None, email: str or None = None):
         self.company = company
         self.name = name
         self.address = address

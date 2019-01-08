@@ -12,11 +12,11 @@ A tool for scraping the website of physical therapy websites to get their locati
 * Select Physical Therapy
 * Novacare (Part of Select)
 * Pivot Physical Therapy
+* Professional PT
+* Upstream Rehabilitation (URPT)
 
 ### (Hopefully soon to be) supported physical therapy websites
 
-* Professional PT
-* Upstream Rehabilitation
 * Fyzical
 * CORA Health Services
 
