@@ -59,10 +59,15 @@ class Requester:
         retval: BeautifulSoup or None = Requester._get_page_bs(url)
         return retval
     
-    def post_form_json(self, url: str, data: Dict):
+    def form_json(self, req_type: str, url: str, params: Dict = dict(), data: Dict = dict()):
         self._ensure_delay()
         try:
-            with post(url, data=data, headers=headers) as resp:
+            if req_type == 'get':
+                func = get
+            elif req_type == 'post':
+                func = post
+
+            with func(url, params=params, data=data, headers=headers) as resp:
                 if Requester.is_good_response(resp, 'json'):
                     return resp.json()
                 else:

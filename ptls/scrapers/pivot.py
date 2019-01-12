@@ -31,7 +31,7 @@ class Pivot:
             state_count = state_count + 1
             sys.stdout.write(f'\r{cls.company_name_upper}: Processing state {state_count}/{states_len}.')
 
-            locations: [str] = cls._get_locations(req.post_form_json(f'{cls.base_url}/wp-admin/admin-ajax.php?', {
+            locations: [str] = cls._get_locations(req.form_json('post', f'{cls.base_url}/wp-admin/admin-ajax.php?', data={
                 'action': 'markersearch',
                 'method': 'state',
                 'state': state,
