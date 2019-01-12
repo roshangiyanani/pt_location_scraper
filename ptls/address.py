@@ -19,9 +19,11 @@ class Address:
     state: str
     zipcode: str or None
     
-    def __init__(self, raw: str, address_line_1: str or None, address_line_2: str or None,
+    def __init__(self, raw: str or None, address_line_1: str or None, address_line_2: str or None,
                  city: str, state: str, zipcode: str or None):
         self.raw = raw
+        if self.raw is None:
+            self.raw = f'{address_line_1} {address_line_2}, {city}, {state} {zipcode}'
         self.address_line_1 = address_line_1
         self.address_line_2 = address_line_2
         self.city = city
