@@ -14,11 +14,11 @@ A tool for scraping the website of physical therapy companies to get their locat
 * Pivot Physical Therapy
 * Professional PT
 * Upstream Rehabilitation (URPT)
+* CORA Health Services
 
 ### (Hopefully soon to be) supported physical therapy websites
 
 * Fyzical
-* CORA Health Services
 
 ### Output format
 

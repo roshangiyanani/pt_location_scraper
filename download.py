@@ -3,6 +3,7 @@ from pathlib import Path
 from ptls.requester import Requester
 from ptls.scrapers.athletico import Athletico
 from ptls.scrapers.ATI import ATI
+from ptls.scrapers.cora import CORA
 from ptls.scrapers.pivot import Pivot
 from ptls.scrapers.professional import Professional
 from ptls.scrapers.select import Select
@@ -19,6 +20,7 @@ def download(file: Path, url: str):
 clinic_scrapers = [
     Athletico,
     ATI,
+    CORA,
     Pivot,
     Professional,
     Select,
