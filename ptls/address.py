@@ -6,7 +6,7 @@ search: SearchEngine = SearchEngine()
 
 def get_zip(city: str, state: str) -> str:
     zipcodes: [SimpleZipcode] = search.by_city_and_state(city, state)
-    if len(zipcodes) == 1:
+    if len(zipcodes) >= 1:
         return zipcodes[0].zipcode
     else:
         return None
