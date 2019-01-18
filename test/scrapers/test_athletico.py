@@ -3,7 +3,7 @@ from pathlib import Path
 
 from ptls.address import Address
 from ptls.clinic import Clinic
-from ptls.scrapers.athletico import Athletico
+from ptls.scrapers import Athletico
 
 path: Path = Path(f'./data/test_files/{Athletico.company_name}')
 

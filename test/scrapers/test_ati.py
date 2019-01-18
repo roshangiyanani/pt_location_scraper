@@ -4,7 +4,7 @@ import unittest
 
 from ptls.address import Address
 from ptls.clinic import Clinic
-from ptls.scrapers.ATI import ATI
+from ptls.scrapers import ATI
 
 path: Path = Path(f'./data/test_files/{ATI.company_name}')
 

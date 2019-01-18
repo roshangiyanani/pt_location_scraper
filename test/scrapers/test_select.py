@@ -4,7 +4,7 @@ import unittest
 
 from ptls.address import Address
 from ptls.clinic import Clinic
-from ptls.scrapers.select import Select
+from ptls.scrapers import Select
 
 path: Path = Path(f'./data/test_files/{Select.company_name}')
 

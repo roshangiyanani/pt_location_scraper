@@ -4,7 +4,7 @@ import unittest
 
 from ptls.address import Address
 from ptls.clinic import Clinic
-from ptls.scrapers.pivot import Pivot
+from ptls.scrapers import Pivot
 
 path: Path = Path(f'./data/test_files/{Pivot.company_name}')
 

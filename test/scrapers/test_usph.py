@@ -4,7 +4,7 @@ import unittest
 
 from ptls.address import Address
 from ptls.clinic import Clinic
-from ptls.scrapers.USPh import USPh
+from ptls.scrapers import USPh
 
 path: Path = Path(f'./data/test_files/{USPh.company_name}')
 

@@ -10,7 +10,7 @@ class Pivot:
 
     base_url: str = 'https://www.pivotphysicaltherapy.com'
 
-    company_name = 'Pivot Physical Therapy'
+    company_name = 'Pivot'
     company_name_upper = company_name.upper()
 
     test_urls: Dict[str, Tuple[str, str]] = dict({

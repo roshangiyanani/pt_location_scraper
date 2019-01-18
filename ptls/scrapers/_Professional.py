@@ -7,7 +7,7 @@ from ptls.clinic import Clinic
 from ptls.requester import Requester
 
 class Professional:
-    company_name = 'Professional Physical Therapy'
+    company_name = 'Professional'
     company_name_upper = company_name.upper()
 
     base_url: str = 'https://www.professionalpt.com'
