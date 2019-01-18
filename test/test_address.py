@@ -23,4 +23,4 @@ class TestAddressClass(unittest.TestCase):
 
         city = 'Bethlehem'
         state = 'PA'
-        self.assertEqual(None, get_zip(city, state))
+        self.assertEqual('18015', get_zip(city, state))
