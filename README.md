@@ -15,10 +15,10 @@ A tool for scraping the website of physical therapy companies to get their locat
 * Professional PT
 * Upstream Rehabilitation (URPT)
 * CORA Health Services
+* Fyzical
 
 ### (Hopefully soon to be) supported physical therapy websites
 
-* Fyzical
 
 ### Output format
 
